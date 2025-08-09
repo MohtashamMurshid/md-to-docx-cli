@@ -72,6 +72,8 @@ For programmatic APIs and advanced styling, see the library:
 
 Issues and PRs are welcome. Before publishing, this package builds TypeScript to dist/ and ships bin/ and dist/ only.
 
+email me at contact@mohtasham.dev
+
 ## License
 
 MIT
