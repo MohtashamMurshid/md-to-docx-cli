@@ -1,6 +1,6 @@
 {
   "name": "md-to-docx-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI for converting Markdown to DOCX using @mohtasham/md-to-docx",
   "type": "module",
   "main": "dist/cli.js",
