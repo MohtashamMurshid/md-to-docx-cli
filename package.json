@@ -1,0 +1,62 @@
+{
+  "name": "md-to-docx-cli",
+  "version": "0.1.0",
+  "description": "CLI for converting Markdown to DOCX using @mohtasham/md-to-docx",
+  "type": "module",
+  "main": "dist/cli.js",
+  "types": "dist/cli.d.ts",
+  "bin": {
+    "md-to-docx": "bin/md-to-docx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohtashamMurshid/md-to-docx-cli.git"
+  },
+  "homepage": "https://github.com/MohtashamMurshid/md-to-docx-cli#readme",
+  "bugs": {
+    "url": "https://github.com/MohtashamMurshid/md-to-docx-cli/issues"
+  },
+  "license": "MIT",
+  "author": "Mohtasham Murshid <mohtashammurshid@gmail.com>",
+  "keywords": [
+    "markdown",
+    "docx",
+    "msword",
+    "converter",
+    "cli",
+    "ink",
+    "typescript"
+  ],
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build",
+    "prepack": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo 'No tests yet' && exit 0"
+  },
+  "dependencies": {
+    "@mohtasham/md-to-docx": "^2.2.1",
+    "ink": "^5.2.1",
+    "react": "^18.3.1",
+    "meow": "^13.2.0",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "open": "^10.1.0",
+    "ink-select-input": "^6.2.0",
+    "ink-gradient": "^3.0.0",
+    "ink-big-text": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.5",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
