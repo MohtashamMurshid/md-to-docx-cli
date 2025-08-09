@@ -334,6 +334,7 @@ export function App({
 
   return (
     <Box flexDirection="column" paddingX={1}>
+      {/* Header */}
       <Box marginBottom={1} flexDirection="column">
         <Gradient name="atlas">
           <BigText text="md-to-docx" font="simple" />
@@ -341,9 +342,60 @@ export function App({
         <Text color="gray">Markdown → DOCX converter</Text>
       </Box>
 
+      {/* Context bar */}
+      <Box marginBottom={1}>
+        <Text>
+          <Text backgroundColor="blue" color="white">
+            {" "}
+            ⌁{" "}
+          </Text>
+          <Text color="cyan"> Ready</Text>
+          {flags.watch && (
+            <Text>
+              <Text color="gray"> • </Text>
+              <Text backgroundColor="magenta" color="black">
+                {" "}
+                WATCH{" "}
+              </Text>
+            </Text>
+          )}
+          {flags.open && (
+            <Text>
+              <Text color="gray"> • </Text>
+              <Text backgroundColor="green" color="black">
+                {" "}
+                AUTO-OPEN{" "}
+              </Text>
+            </Text>
+          )}
+          {flags.verbose && (
+            <Text>
+              <Text color="gray"> • </Text>
+              <Text backgroundColor="yellow" color="black">
+                {" "}
+                VERBOSE{" "}
+              </Text>
+            </Text>
+          )}
+        </Text>
+      </Box>
+
+      {/* Separator */}
+      <Box marginY={1}>
+        <Text color="gray">
+          {"─".repeat(Math.min(process.stdout?.columns ?? 80, 80))}
+        </Text>
+      </Box>
+
       {!inputPath && (
         <Box marginBottom={1} flexDirection="column">
-          <Text>Enter path to a .md file:</Text>
+          <Text>
+            <Text backgroundColor="cyan" color="black">
+              {" "}
+              INPUT{" "}
+            </Text>
+            <Text> Enter path to a .md file:</Text>
+          </Text>
           <TextInput
             value={pathValue}
             onChange={setPathValue}
@@ -351,9 +403,16 @@ export function App({
             placeholder="./README.md"
           />
           {pathCheckMessage && (
-            <Text color={pathIsValid ? "green" : "yellow"}>
-              {pathIsValid ? "✔ " : "ℹ "}
-              {pathCheckMessage}
+            <Text>
+              <Text
+                backgroundColor={pathIsValid ? "green" : "yellow"}
+                color="black"
+              >
+                {pathIsValid ? " OK " : " INFO "}
+              </Text>{" "}
+              <Text color={pathIsValid ? "green" : "yellow"}>
+                {pathCheckMessage}
+              </Text>
             </Text>
           )}
           {!pathValue && (
@@ -365,29 +424,64 @@ export function App({
       )}
 
       {busy && (
-        <Text>
-          <Text color="cyan">
-            <Spinner type="dots" />
-          </Text>{" "}
-          {status}
-        </Text>
+        <Box marginY={1}>
+          <Text>
+            <Text backgroundColor="cyan" color="black">
+              {" "}
+              WORKING{" "}
+            </Text>{" "}
+            <Text color="cyan">
+              <Spinner type="dots" />
+            </Text>{" "}
+            <Text color="white">{status}</Text>
+          </Text>
+        </Box>
       )}
 
       {!busy && status && !error && (
-        <Text color={status.startsWith("Done:") ? "green" : "white"}>
-          {status.startsWith("Done:") ? "✔ " : "ℹ "}
-          {status}
+        <Box marginY={1}>
+          <Text>
+            <Text
+              backgroundColor={status.startsWith("Done:") ? "green" : "blue"}
+              color={status.startsWith("Done:") ? "black" : "white"}
+            >
+              {status.startsWith("Done:") ? " DONE " : " INFO "}
+            </Text>{" "}
+            <Text color={status.startsWith("Done:") ? "green" : "white"}>
+              {status}
+            </Text>
+          </Text>
+        </Box>
+      )}
+
+      {error && (
+        <Box marginY={1}>
+          <Text>
+            <Text backgroundColor="red" color="white">
+              {" "}
+              ERROR{" "}
+            </Text>{" "}
+            <Text color="red">{error}</Text>
+          </Text>
+        </Box>
+      )}
+
+      {!busy && !status && !error && ready && (
+        <Text>
+          <Text backgroundColor="green" color="black">
+            {" "}
+            READY{" "}
+          </Text>{" "}
+          <Text color="green">Press Enter to convert</Text>
         </Text>
       )}
 
-      {error && <Text color="red">✖ Error: {error}</Text>}
-
-      {!busy && !status && !error && ready && (
-        <Text color="green">Press Enter to convert</Text>
-      )}
-
+      {/* Footer */}
       <Box marginTop={1}>
-        <Text color="gray">Press Ctrl+C to exit at any time.</Text>
+        <Text color="gray">
+          Press Enter to start • Press Ctrl+C to exit • Flags: --toc{" "}
+          {flags.toc ? "on" : "off"}, --rtl {flags.rtl ? "on" : "off"}
+        </Text>
       </Box>
     </Box>
   );
